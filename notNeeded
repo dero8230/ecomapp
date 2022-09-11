@@ -1,0 +1,31 @@
+Container(
+                      decoration: BoxDecoration(
+                        gradient: RadialGradient(
+                            colors: [
+                              Colors.grey.withOpacity(0.3),
+                              Colors.grey,
+                            ],
+                            center: Alignment(0, 0),
+                            radius: 0.6,
+                            focal: Alignment(0, 0),
+                            focalRadius: 0.1),
+                      ),
+                      child: Hero(
+                          tag: products[index].image,
+                          child: Image.network(
+                            products[index].image,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox.shrink();
+                            },
+                            loadingBuilder: (context, child, progress) {
+                              return  progress == null
+                                                                     ? child
+                                  : Center(
+                                      child: CircularProgressIndicator(
+                                          value: (progress.cumulativeBytesLoaded /
+                                                  progress.expectedTotalBytes!
+                                                      .toInt())
+                                              .toDouble()),
+                                    );
+                            },
+                          )))
